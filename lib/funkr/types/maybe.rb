@@ -3,23 +3,26 @@ require 'funkr/categories/functor'
 require 'funkr/categories/applicative'
 require 'funkr/categories/alternative'
 require 'funkr/categories/monoid'
+require 'funkr/categories/monad'
 
 module Funkr
   class Maybe < ADT
+
+    include Funkr::Categories
     
     adt :just, :nothing
     
     include Functor
     
     def map(&block)
-      case self.const
-      when :just then
-        Maybe.just(yield(*self.data))
-      else self
+      self.match do |on|
+        on.just {|v| Maybe.just(yield(v))}
+        on.nothing { self }
       end
     end
     
     include Applicative
+    extend Applicative::ClassMethods
     
     def apply(to)
       self.match do |f_on|
@@ -33,16 +36,12 @@ module Funkr
       end
     end
     
-    def self.lift_proc(&block)
-      Maybe.just(block.curry)
-    end
-    
     include Alternative
     
     def or_else(&block)
-      case self.const
-      when :just then self
-      else yield
+      self.match do |on|
+        on.just {|v| self}
+        on.nothing { yield }
       end
     end
     
@@ -67,9 +66,9 @@ module Funkr
     extend Monad::ClassMethods
     
     def bind(&block)
-      case self.const
-      when :just then yield(*self.data)
-      else self
+      self.match do |on|
+        on.just {|v| yield(v)}
+        on.nothing {self}
       end
     end
     

@@ -2,18 +2,21 @@ require "funkr/adt/matcher"
 
 module Funkr
   class ADT
-    
-    attr_reader :const, :data
-    
+
     def initialize(const, *data)
       @const, @data = const, data
     end
-    
     
     def self.adt(*constructs)
       build_adt(constructs)
       build_matcher(constructs)
     end
+
+    def self.match_method=(method)
+      @match_method = method
+    end
+
+    self.match_method = :safe
     
     def self.matcher; @matcher; end
     
@@ -31,6 +34,8 @@ module Funkr
     end
     
     private
+
+    attr_reader :const, :data
     
     def normal_form; [@const, *@data]; end
     
@@ -43,10 +48,10 @@ module Funkr
     end
     
     def self.build_matcher(constructs)
-      @matcher = Class.new(Matcher) do
+      @matcher = Class.new(Funkr::Matcher) do
         build_matchers(constructs)
       end
     end
-    
+
   end
 end

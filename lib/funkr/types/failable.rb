@@ -3,10 +3,13 @@ require 'funkr/categories/functor'
 require 'funkr/categories/applicative'
 require 'funkr/categories/alternative'
 require 'funkr/categories/monoid'
+require 'funkr/categories/monad'
 
 module Funkr
   class Failable < ADT
     
+    include Funkr::Categories
+
     adt :ok, :failed
     
     class << self
@@ -64,6 +67,17 @@ module Funkr
             y_on.ok {|y| Failable.ok(x.mplus(y))}
           end
         end
+      end
+    end
+
+    
+    include Monad
+    extend Monad::ClassMethods
+    
+    def bind(&block)
+      case self.const
+      when :ok then yield(*self.data)
+      else self
       end
     end
     
