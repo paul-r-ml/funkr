@@ -7,10 +7,12 @@ require 'funkr/categories/monad'
 
 module Funkr
   class Maybe < ADT
-
+    
     include Funkr::Categories
     
     adt :just, :nothing
+    
+    ### Categories
     
     include Functor
     
@@ -77,6 +79,18 @@ module Funkr
       alias unit just
       alias pure just
       alias mzero nothing
+    end
+    
+    def self.box(value)
+      if value.nil? then self.nothing
+      else self.just(value) end
+    end
+    
+    def self.unbox(value)
+      self.match do |on|
+        on.maybe {|v| v }
+        on.nothing { nil }
+      end
     end
     
   end

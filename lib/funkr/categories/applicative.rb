@@ -7,8 +7,16 @@ module Funkr
       end
 
       module ClassMethods
-        def lift_proc(&block)
+        def curry_lift_proc(&block)
           self.pure(block.curry)
+        end
+
+        def full_lift_proc(&block)
+          lambda do |*args|
+            args.inject(curry_lift_proc(&block)) do |a,e|
+              a.apply(e)
+            end
+          end
         end
       end
 
@@ -42,7 +50,7 @@ module Funkr
 
       def proxy_comp(other,&block)
         self.class.
-          lift_proc(&block).
+          curry_lift_proc(&block).
           apply(self).apply(other)
       end
 

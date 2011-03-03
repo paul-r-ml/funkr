@@ -41,9 +41,6 @@ module Funkr
       end
     end
     
-    def self.lift_proc(&block)
-      Failable.ok(block.curry)
-    end
     
     include Alternative
     

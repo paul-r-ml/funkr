@@ -12,13 +12,6 @@ puts(m.match do |on|
 
 puts(m.map{|v| v+1 })
 
-val = (m.match do |on|
-         on.nothing{ Maybe.nothing }
-         on.just{|v| Maybe.just(v + 1) }
-       end)
-
-puts m.map{|v| v + 1}
-
 
 n = Maybe.nothing
 
@@ -28,13 +21,16 @@ puts(n.match do |on|
      end.to_s)
 
 
-f = Maybe.lift_proc{|x,y| x + y}
-
-
+puts "\n> Curry lift"
+f = Maybe.curry_lift_proc{|x,y| x + y}
 puts f.apply(m).apply(m)
 puts f.apply(m).apply(n)
 puts f.apply(m).apply(n.or_else{Maybe.just(10)})
 
+puts "\n> Full lift"
+f = Maybe.full_lift_proc{|x,y| x + y}
+puts f.call(m,m)
+puts f.call(m,n)
 
 # puts Maybe.mconcat([Maybe.just(10),
 #                     Maybe.just(20),
