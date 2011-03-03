@@ -83,9 +83,9 @@ module Funkr
         else self.just(value) end
       end
       
-      def self.unbox(value)
+      def unbox
         self.match do |on|
-          on.maybe {|v| v }
+          on.just {|v| v }
           on.nothing { nil }
         end
       end

@@ -41,3 +41,9 @@ puts(m <=> m)
 puts(m <=> (m.map{|v| v+1}))
 puts(m <= (m.map{|v| v+1}))
 puts(m <=> n)
+
+puts "\n> Boxing and unboxing"
+puts m.unbox.inspect
+puts n.unbox.inspect
+puts (Maybe.box(12)).unbox.inspect
+puts (Maybe.box(nil)).unbox.inspect
