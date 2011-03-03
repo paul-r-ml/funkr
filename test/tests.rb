@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'funkr'
+require 'funkr/types'
 
-include Funkr
+include Funkr::Types
 
 m = Maybe.just(5)
 
