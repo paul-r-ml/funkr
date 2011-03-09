@@ -3,7 +3,6 @@ require 'funkr/types'
 
 include Funkr::Types
 
-
 m = Maybe.just(5)
 
 puts(m.match do |on|
@@ -50,18 +49,18 @@ puts (Maybe.box(12)).unbox.inspect
 puts (Maybe.box(nil)).unbox.inspect
 
 
-a = FArray.new([1,2,3])
-b = FArray.new([10,20,30])
+a = [1,2,3]
+b = [10,20,30]
 
 puts "\n> Array full lift"
-f = FArray.full_lift_proc{|x,y| x + y}
+f = Array.full_lift_proc{|x,y| x + y}
 puts f.call(a,b).inspect
 puts f.call(a,[]).inspect
 
 puts "\n> Array monad"
 puts(a.bind do |x|
        b.bind do |y|
-         FArray.unit(x + y)
+         Array.unit(x + y)
        end
-     end).inspect
+     end.inspect)
 
