@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'funkr/types'
+require 'funkr/extensions'
 
 include Funkr::Types
 
@@ -32,10 +33,10 @@ f = Maybe.full_lift_proc{|x,y| x + y}
 puts f.call(m,m)
 puts f.call(m,n)
 
-# puts Maybe.mconcat([Maybe.just(10),
-#                     Maybe.just(20),
-#                     Maybe.nothing,
-#                     Maybe.just(30)])
+puts Maybe.mconcat([Maybe.just(10),
+                    Maybe.just(20),
+                    Maybe.nothing,
+                    Maybe.just(30)])
 
 puts(m <=> m)
 puts(m <=> (m.map{|v| v+1}))
