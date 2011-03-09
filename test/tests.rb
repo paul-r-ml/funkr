@@ -65,3 +65,6 @@ puts(a.bind do |x|
        end
      end.inspect)
 
+
+puts "\n> group_seq_by"
+puts([1,2,4,5,7,5,8,2,10].group_seq_by{|x| x % 2}.inspect)

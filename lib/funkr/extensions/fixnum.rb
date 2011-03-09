@@ -1,6 +1,8 @@
 require "funkr/categories/monoid"
 
 class Fixnum
+
+  include Funkr::Categories
   
   include Monoid
   extend Monoid::ClassMethods
