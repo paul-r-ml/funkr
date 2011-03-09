@@ -24,7 +24,7 @@ module Funkr
       def <=>(other)
         proxy_comp(other){|a,b| a <=> b}
       end
-      
+       
       def ==(other)
         proxy_comp(other){|a,b| a == b}
       end
