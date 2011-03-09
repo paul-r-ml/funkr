@@ -3,6 +3,7 @@ require 'funkr/types'
 
 include Funkr::Types
 
+
 m = Maybe.just(5)
 
 puts(m.match do |on|
@@ -39,7 +40,7 @@ puts f.call(m,n)
 
 puts(m <=> m)
 puts(m <=> (m.map{|v| v+1}))
-puts(m <= (m.map{|v| v+1}))
+puts(m < (m.map{|v| v+1}))
 puts(m <=> n)
 
 puts "\n> Boxing and unboxing"
@@ -47,3 +48,20 @@ puts m.unbox.inspect
 puts n.unbox.inspect
 puts (Maybe.box(12)).unbox.inspect
 puts (Maybe.box(nil)).unbox.inspect
+
+
+a = FArray.new([1,2,3])
+b = FArray.new([10,20,30])
+
+puts "\n> Array full lift"
+f = FArray.full_lift_proc{|x,y| x + y}
+puts f.call(a,b).inspect
+puts f.call(a,[]).inspect
+
+puts "\n> Array monad"
+puts(a.bind do |x|
+       b.bind do |y|
+         FArray.unit(x + y)
+       end
+     end).inspect
+

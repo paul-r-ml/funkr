@@ -1,9 +1,9 @@
-require 'funkr/adt/adt'
 require 'funkr/categories'
 
 module Funkr
   module Types
-    class Array
+    
+    class FArray < Array
       
       include Funkr::Categories
       
