@@ -91,9 +91,9 @@ class Array
   end
 
   # Constitue des groupes de n éléments
-  def groups_of(ar, n)
+  def groups_of(n)
     return [] if self.empty?
-    [self.take(n)] + groups_of(self.drop(n), n)
+    [self.take(n)] + self.drop(n).groups_of(n)
   end
 
   
