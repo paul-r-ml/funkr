@@ -89,5 +89,12 @@ class Array
     else [[], self]
     end
   end
+
+  # Constitue des groupes de n éléments
+  def groups_of(ar, n)
+    return [] if self.empty?
+    [self.take(n)] + groups_of(self.drop(n), n)
+  end
+
   
 end

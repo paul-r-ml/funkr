@@ -18,6 +18,10 @@ module Funkr
             end
           end
         end
+
+        def lift_with(*args, &block)
+          full_lift_proc(&block).call(*args)
+        end
       end
 
       

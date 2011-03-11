@@ -33,11 +33,16 @@ f = Maybe.full_lift_proc{|x,y| x + y}
 puts f.call(m,m)
 puts f.call(m,n)
 
+puts "\n> Lift with"
+puts Maybe.lift_with(m,m){|x,y| x + y}
+
+puts "\n> mconcat"
 puts Maybe.mconcat([Maybe.just(10),
                     Maybe.just(20),
                     Maybe.nothing,
                     Maybe.just(30)])
 
+puts "\n> Comparisons"
 puts(m <=> m)
 puts(m <=> (m.map{|v| v+1}))
 puts(m < (m.map{|v| v+1}))
