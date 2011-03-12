@@ -71,7 +71,6 @@ module Funkr
         end
       end
       
-      
       class << self
         alias unit just
         alias pure just

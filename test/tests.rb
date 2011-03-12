@@ -1,4 +1,7 @@
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
 require 'rubygems'
+require 'funkr'
 require 'funkr/types'
 require 'funkr/extensions'
 
