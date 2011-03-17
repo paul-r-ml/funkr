@@ -90,10 +90,21 @@ class Array
     end
   end
 
-  # Constitue des groupes de n éléments
+  # Constitue des groupes disjoints de n éléments au plus
   def groups_of(n)
     return [] if self.empty?
     [self.take(n)] + self.drop(n).groups_of(n)
+  end
+
+  # constitue des groupes de n éléments exactement, décalés de 1
+  def sliding_groups_of(n)
+    return [] if self.size < n
+    [ self.take(n) ] + self.tail.sliding_groups_of(n)
+  end
+
+  # trouve l'index d'une séquence
+  def seq_index(seq)
+    self.sliding_groups_of(seq.size).index(seq)
   end
 
   

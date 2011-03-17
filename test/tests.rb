@@ -80,3 +80,10 @@ puts([1,2,4,5,7,5,8,2,10].group_seq_by{|x| x % 2}.inspect)
 
 puts "\n> groups_of"
 puts([1,2,4,5,7,5,8,2,10].groups_of(4).inspect)
+
+puts "\n> sliding_groups_of"
+puts((1..10).to_a.sliding_groups_of(3).inspect)
+
+puts "\n> seq_index (30)"
+puts((0..100).to_a.seq_index([30,31,32]))
+
