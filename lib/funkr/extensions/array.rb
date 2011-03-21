@@ -107,5 +107,10 @@ class Array
     self.sliding_groups_of(seq.size).index(seq)
   end
 
+  # difference entre 2 tableaux, retourne le couple [ [missing] , [added] ]
+  def diff_with(other, &block)
+    [ self.inject([]){|a,e| other.find{|x| yield(e,x)} ? a : a + [e]},
+      other.inject([]){|a,e| self.find{|x| yield(e,x)} ? a : a + [e]} ]
+  end
   
 end

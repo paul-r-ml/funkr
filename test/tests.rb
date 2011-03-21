@@ -87,3 +87,7 @@ puts((1..10).to_a.sliding_groups_of(3).inspect)
 puts "\n> seq_index (30)"
 puts((0..100).to_a.seq_index([30,31,32]))
 
+puts "\n> diff_with"
+a = [ {:v => 1}, {:v => 2}, {:v => 3} ]
+b = [ {:v => 2}, {:v => 3}, {:v => 4} ]
+puts(a.diff_with(b){|x,y| x[:v] == y[:v]}.inspect)
