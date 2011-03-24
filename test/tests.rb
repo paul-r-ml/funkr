@@ -74,9 +74,11 @@ puts(a.bind do |x|
      end.inspect)
 
 
+puts "\n> span"
+puts([1,2,4,5,7,5,8,2,10].span{|x| x < 5}.inspect)
+
 puts "\n> group_seq_by"
 puts([1,2,4,5,7,5,8,2,10].group_seq_by{|x| x % 2}.inspect)
-
 
 puts "\n> groups_of"
 puts([1,2,4,5,7,5,8,2,10].groups_of(4).inspect)
@@ -88,6 +90,10 @@ puts "\n> seq_index (30)"
 puts((0..100).to_a.seq_index([30,31,32]))
 
 puts "\n> diff_with"
-a = [ {:v => 1}, {:v => 2}, {:v => 3} ]
-b = [ {:v => 2}, {:v => 3}, {:v => 4} ]
+a = [ {:v => 1}, {:v => 2}, {:v => 3}, {:v => 2}, {:v => 3} ]
+b = [ {:v => 2}, {:v => 3}, {:v => 4}, {:v => 3}, {:v => 4} ]
 puts(a.diff_with(b){|x,y| x[:v] == y[:v]}.inspect)
+
+puts "\n> uniq_by"
+a = [ {:v => 1}, {:v => 2}, {:v => 3}, {:v => 2}, {:v => 3}, {:v => 1} ]
+puts(a.uniq_by{|x,y| x[:v] == y[:v]}.inspect)

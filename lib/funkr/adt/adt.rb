@@ -44,6 +44,9 @@ module Funkr
         define_singleton_method(c) do |*data|
           self.new(c,*data)
         end
+        define_method(format("%s?",c).to_sym) do
+          const() == c
+        end
       end
     end
     
