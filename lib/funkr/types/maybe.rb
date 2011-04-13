@@ -82,10 +82,10 @@ module Funkr
         else self.just(value) end
       end
       
-      def unbox
+      def unbox(default=nil)
         self.match do |on|
           on.just {|v| v }
-          on.nothing { nil }
+          on.nothing { default }
         end
       end
       
