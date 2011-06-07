@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Enumerable
   
   # enumerable extensions
@@ -54,7 +55,9 @@ module Enumerable
     self.sliding_groups_of(seq.size).index(seq)
   end
 
-  def uniq_by(&block)
+  # Prend un prédicat p(x,y), et construit un tableau dans lequel tous
+  # les couples (a,b), tels que 'a' précède 'b', vérifient p(a,b).
+  def make_uniq_by(&block)
     result = []
     self.each do |e|
       unless result.any?{|x| yield(x,e)} then result.push(e) end
@@ -66,8 +69,8 @@ module Enumerable
   # codé en impératif parce que inject est trop lent :(
   def diff_with(other, &block)
     m, i, a = [], [], []
-    u_s = self.uniq_by(&block)
-    u_o = other.uniq_by(&block)
+    u_s = self.make_uniq_by(&block)
+    u_o = other.make_uniq_by(&block)
     u_s.each do |e| 
       if u_o.find{|x| yield(e,x)} then i.push(e)  # intersection
       else m.push(e) end   # missing

@@ -96,4 +96,4 @@ puts(a.diff_with(b){|x,y| x[:v] == y[:v]}.inspect)
 
 puts "\n> uniq_by"
 a = [ {:v => 1}, {:v => 2}, {:v => 3}, {:v => 2}, {:v => 3}, {:v => 1} ]
-puts(a.uniq_by{|x,y| x[:v] == y[:v]}.inspect)
+puts(a.make_uniq_by{|x,y| x[:v] == y[:v]}.inspect)
