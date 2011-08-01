@@ -3,7 +3,7 @@ module Enumerable
   
   # enumerable extensions
   def all_different?
-    a = self.to_a
+    a = self.to_a.drop(1)
     self.each do |e|
       return false if a.include?(e)
       a.shift

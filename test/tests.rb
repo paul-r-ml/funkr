@@ -9,6 +9,11 @@ include Funkr::Types
 
 m = Maybe.just(5)
 
+puts "\n> All different ?"
+puts([1,2,3].all_different?)
+puts([1,2,2,3].all_different?)
+
+puts "\n> Maybe"
 puts(m.match do |on|
        on.nothing{ Maybe.nothing }
        on.just{|v| Maybe.just(v + 1) }
