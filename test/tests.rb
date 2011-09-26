@@ -102,3 +102,17 @@ puts(a.diff_with(b){|x,y| x[:v] == y[:v]}.inspect)
 puts "\n> make_uniq_by"
 a = [ {:v => 1}, {:v => 2}, {:v => 3}, {:v => 2}, {:v => 3}, {:v => 1} ]
 puts(a.make_uniq_by{|x,y| x[:v] == y[:v]}.inspect)
+
+
+puts "\n> SimpleRecords"
+r = SimpleRecord.new(name: "Paul", age: 27, city: "Rennes")
+puts r.to_s
+name, age, city = r
+puts format("%s is %s and lives in %s", name, age, city)
+name, age, city = r.with(age: 28, city: "Trouville")
+puts format("%s is now %s and lives in %s", name, age, city)
+puts format("%s is back to %s and really lives in %s", r.name, r.age, r.city)
+r.name = "Paul R"
+puts r.to_s
+
+
