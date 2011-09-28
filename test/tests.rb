@@ -118,6 +118,8 @@ puts format("%s is now %s and lives in %s", name, age, city)
 puts format("%s is back to %s and really lives in %s", r.name, r.age, r.city)
 r.name = "Paul R"
 puts r.to_s
+r.update!(name: "Paul")
+puts r.to_s
 
 class Person < SimpleRecord;  fields :name, :age, :city; end
 r = Person.new(name: "Paul", age: 27, city: "Rennes")

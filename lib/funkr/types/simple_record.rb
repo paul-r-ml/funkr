@@ -34,6 +34,11 @@ module Funkr
       def with(new_key_vals)
         self.class.new(@key_vals.merge(new_key_vals))
       end
+
+      def update!(new_key_vals)
+        @key_vals.merge!(new_key_vals)
+        self
+      end
       
       def to_hash; @key_vals; end
       
