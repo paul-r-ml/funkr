@@ -19,7 +19,7 @@ module Funkr
       def map(&block)
         case self.const
         when :ok then
-          Failable.ok(yield(*self.data))
+          self.class.ok(yield(*self.data))
         else self
         end
       end
@@ -30,7 +30,7 @@ module Funkr
         self.match do |f_on|
           f_on.ok do |f|
             to.match do |t_on|
-              t_on.ok {|t| Failable.ok(f.call(t)) }
+              t_on.ok {|t| self.class.ok(f.call(t)) }
               t_on.failed { to }
             end
           end
@@ -58,7 +58,7 @@ module Funkr
           x_on.ok do |x|
             m_y.match do |y_on|
               y_on.failed { self }
-              y_on.ok {|y| Failable.ok(x.mplus(y))}
+              y_on.ok {|y| self.class.ok(x.mplus(y))}
             end
           end
         end

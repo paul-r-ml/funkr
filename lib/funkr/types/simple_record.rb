@@ -6,8 +6,21 @@ module Funkr
       ### r = SimpleRecord.new( name: "Paul", age: 27 )
       ### r.name => "Paul"  ; r.age => 27
       ### name, age = r
-      
+
+      ### other usage :
+      ### class Person < SimpleRecord; fields :name, :age; end
+      ### Person.new( name: Paul ) => Error, missing :age
+
+      class << self; attr_accessor :fields_list; end
+      @fields_list = nil
+
+      def self.fields(*flds); self.fields_list = flds; end
+
       def initialize(key_vals)
+        fields = self.class.fields_list
+        if not fields.nil? and fields != key_vals.keys then
+          raise "#{self.class.to_s} wrong initialization, expected #{fields}"
+        end
         @key_vals = key_vals
         key_vals.each do |k,v|
           getter = k.to_sym

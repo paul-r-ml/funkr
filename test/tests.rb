@@ -62,6 +62,10 @@ puts n.unbox.inspect
 puts (Maybe.box(12)).unbox.inspect
 puts (Maybe.box(nil)).unbox.inspect
 
+puts "\n> Containers"
+c = Container.new("Value")
+puts c.unbox
+puts c.map(&:reverse)
 
 a = [1,2,3]
 b = [10,20,30]
@@ -115,4 +119,8 @@ puts format("%s is back to %s and really lives in %s", r.name, r.age, r.city)
 r.name = "Paul R"
 puts r.to_s
 
+class Person < SimpleRecord;  fields :name, :age, :city; end
+r = Person.new(name: "Paul", age: 27, city: "Rennes")
+x = Person.new(name: "Paul", age: 27, city: "Rennes", genre: "Male") rescue "Forbidden"
+y = Person.new(name: "Paul", age: 27) rescue "Forbidden"
 

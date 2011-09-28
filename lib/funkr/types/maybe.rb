@@ -15,7 +15,7 @@ module Funkr
       
       def map(&block)
         self.match do |on|
-          on.just {|v| Maybe.just(yield(v))}
+          on.just {|v| self.class.just(yield(v))}
           on.nothing { self }
         end
       end
@@ -27,7 +27,7 @@ module Funkr
         self.match do |f_on|
           f_on.just do |f|
             to.match do |t_on|
-              t_on.just {|t| Maybe.unit(f.call(t)) }
+              t_on.just {|t| self.class.unit(f.call(t)) }
               t_on.nothing { to }
             end
           end
@@ -54,7 +54,7 @@ module Funkr
           x_on.just do |x|
             m_y.match do |y_on|
               y_on.nothing { self }
-              y_on.just {|y| Maybe.just(x.mplus(y))}
+              y_on.just {|y| self.class.just(x.mplus(y))}
             end
           end
         end
