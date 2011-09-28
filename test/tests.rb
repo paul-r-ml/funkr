@@ -119,10 +119,12 @@ puts format("%s is back to %s and really lives in %s", r.name, r.age, r.city)
 r.name = "Paul R"
 puts r.to_s
 r.update!(name: "Paul")
-puts r.to_s
+n, _x, _y = r
+puts n
 
 class Person < SimpleRecord;  fields :name, :age, :city; end
 r = Person.new(name: "Paul", age: 27, city: "Rennes")
+puts r.to_s
 x = Person.new(name: "Paul", age: 27, city: "Rennes", genre: "Male") rescue "Forbidden"
 y = Person.new(name: "Paul", age: 27) rescue "Forbidden"
 
