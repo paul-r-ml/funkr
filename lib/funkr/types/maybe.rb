@@ -71,6 +71,13 @@ module Funkr
         end
       end
       
+      def unbox(default=nil)
+        self.match do |on|
+          on.just {|v| v }
+          on.nothing { default }
+        end
+      end
+
       class << self
         alias unit just
         alias pure just
@@ -81,14 +88,19 @@ module Funkr
         if value.nil? then self.nothing
         else self.just(value) end
       end
-      
-      def unbox(default=nil)
-        self.match do |on|
-          on.just {|v| v }
-          on.nothing { default }
+
+      # concat :: [Maybe a] -> [a]
+      #  The Maybe.concat function takes a list of Maybes and returns
+      #  a list of all the Just values.
+      def self.concat(maybes)
+        maybes.inject([]) do |a, e|
+          e.match do |on| 
+            on.just{|v| a + [v]}
+            on.nothing{ a }
+          end
         end
       end
-      
+
     end
   end
 end

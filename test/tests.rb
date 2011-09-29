@@ -50,6 +50,12 @@ puts Maybe.mconcat([Maybe.just(10),
                     Maybe.nothing,
                     Maybe.just(30)])
 
+puts "\n> concat"
+puts Maybe.concat([ Maybe.just(10),
+                    Maybe.just(20),
+                    Maybe.nothing,
+                    Maybe.just(30) ]).inspect
+
 puts "\n> Comparisons"
 puts(m <=> m)
 puts(m <=> (m.map{|v| v+1}))
