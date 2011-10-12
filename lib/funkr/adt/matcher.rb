@@ -1,4 +1,5 @@
 module Funkr
+  # Should not be used directly
   class Matcher
     
     def initialize(match)
