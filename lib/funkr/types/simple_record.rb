@@ -62,20 +62,18 @@ module Funkr
 
       def to_s; @key_vals.to_s; end
 
-    end
+      private
 
-    private
-
-    def rebuild_array
-      self.replace(@key_vals.values)
-    end
-
-    def check_keys(keys)
-      unless keys.all?{|k| @allowed_keys.include?(k)} then
-          raise "#{self.class.to_s} forbidden key in update"
+      def rebuild_array
+        self.replace(@key_vals.values)
       end
+
+      def check_keys(keys)
+        unless keys.all?{|k| @allowed_keys.include?(k)} then
+          raise "#{self.class.to_s} forbidden key in update"
+        end
+      end
+
     end
-
-
   end
 end
