@@ -2,6 +2,13 @@
 module Enumerable
   
   # enumerable extensions
+
+  # Folds an enumerable with an operator
+  def fold_with(sym)
+    self.inject{|a,e| a.public_send(sym,e)}
+  end
+
+  # Check if all elements in collection are differents
   def all_different?
     a = self.to_a.drop(1)
     self.each do |e|

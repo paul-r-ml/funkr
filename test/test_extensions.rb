@@ -47,6 +47,12 @@ class TestExtensions < Test::Unit::TestCase
     assert_equal(30, (0..100).to_a.seq_index([30,31,32]))
   end
 
+  def test_fold_with
+    assert_equal(15, [1,2,3,4,5].fold_with(:+))
+    assert_equal(6, [1,2,3].fold_with(:*))
+    assert_equal(1, [256,2,2,2,2,2,2,2,2].fold_with(:/))
+  end
+
   def test_diff_with
     a = [ {:v => 1}, {:v => 2}, {:v => 3}, {:v => 2}, {:v => 3} ]
     b = [ {:v => 2}, {:v => 3}, {:v => 4}, {:v => 3}, {:v => 4} ]
