@@ -17,9 +17,10 @@ class Array
 
 
   # Array can be made an applicative functor, for example :
-  # f = Array.curry_lift_proc{|x,y| x + y}
-  # f.apply([0,4]).apply([5,7]) => [5, 7, 9, 11]
-  # f.apply([0,4]).apply([]) => []
+  #
+  #   f = Array.curry_lift_proc{|x,y| x + y}
+  #   f.apply([0,4]).apply([5,7]) => [5, 7, 9, 11]
+  #   f.apply([0,4]).apply([]) => []
   include Applicative
   extend Applicative::ClassMethods
 
@@ -49,10 +50,12 @@ class Array
   end
 
 
-  # Array is also a monad
   include Monad
   extend Monad::ClassMethods
 
+  # Array is also a monad
+  #
+  # [1,2].bind{|x| [3,4].bind{|y| x + y}} # => [4,5,5,6]
   def bind(&block)
     self.map(&block).flatten(1)
   end

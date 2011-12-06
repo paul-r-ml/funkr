@@ -40,26 +40,27 @@ module Enumerable
     return [ inc, [] ]
   end
 
-  # Constitue des groupes disjoints de n éléments au plus
+  # builds up disjoint groups of n elements or less
   def groups_of(n)
     g = self.take(n)
     return [] if g.empty?
     [g] + self.drop(n).groups_of(n)
   end
 
-  # constitue des groupes de n éléments exactement, décalés de 1
+  # builds up sliding groups of exactly n elements
   def sliding_groups_of(n)
     return [] if self.size < n
     [ self.take(n) ] + self.drop(1).sliding_groups_of(n)
   end
 
-  # trouve l'index d'une séquence
+  # find the position of a sequence
+  #  [1,2,3,4,5,4,3,2,1].seq_index([4,3])  # => 5
   def seq_index(seq)
     self.sliding_groups_of(seq.size).index(seq)
   end
 
-  # Prend un prédicat p(x,y), et construit un tableau dans lequel tous
-  # les couples (a,b), tels que 'a' précède 'b', vérifient p(a,b).
+  # Takes a block predicate p(x,y) and builds an array of elements so
+  # that for any (a,b), a being before b in the list, p(a,b) holds.
   def make_uniq_by(&block)
     result = []
     self.each do |e|
@@ -68,8 +69,7 @@ module Enumerable
     return result
   end
 
-  # difference entre 2 tableaux, retourne le triplet [ [missing] , [intersection], [added] ]
-  # codé en impératif parce que inject est trop lent :(
+  # compare 2 enumerables, and returns [ [missing] , [intersection], [added] ]
   def diff_with(other, &block)
     m, i, a = [], [], []
     u_s = self.make_uniq_by(&block)
