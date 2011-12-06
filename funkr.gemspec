@@ -9,8 +9,23 @@ Gem::Specification.new do |s|
   s.authors     = ["Paul Rivier"]
   s.email       = ["paul (dot) r (dot) ml (at) gmail (dot) com"]
   s.homepage    = "http://github.com/paul-r-ml/funkr"
-  s.summary     = %q{[EXPERIMENTAL] Some functionnal constructs for ruby}
-  s.description = %q{[EXPERIMENTAL] Some functionnal constructs for ruby, like ADT, functors, monads}
+  s.summary     = %q{Functionnal toolbox for Ruby}
+  s.description = <<EOF
+Funkr is a functionnal toolbox for the Ruby language.
+
+In particular, it offers a simple mechanism to create Algebraïc Data
+Types and do pattern matching on them.
+
+It also provide modules for common categories (Monoid, Monad,
+Functor, Applicative ...), and extends common types to support
+categories they belongs to (Array, Hash ...). Categories can also be
+used with custom types,  see provided classes.
+
+Array and Hash classes are extended with methods providing correct
+behaviour with respect to categories. Enumerable module comes with
+a lot of useful functions for working with lists and sets. See the
+module documentation and the test suite for examples.
+EOF
 
   s.rubyforge_project = "funkr"
 
