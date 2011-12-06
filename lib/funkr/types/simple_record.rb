@@ -11,16 +11,17 @@ module Funkr
     #    mistyping it or by combining it with a different structure
     #  - you have easy access to fields : named AND positional
     #
-    # usage : r = SimpleRecord.new(Hash), then r.field
-    # r = SimpleRecord.new( name: "Paul", age: 27 )
-    # r.name # => "Paul"
-    # r.age  # => 27
-    # name, age = r  # => [ "Paul", 27 ]
-    # r.with(age: 29)  # => [ "Paul", 29 ]
+    # usage :
+    #
+    #   r = SimpleRecord.new( name: "Paul", age: 27 )
+    #   r.name # => "Paul"
+    #   r.age  # => 27
+    #   name, age = r  # => [ "Paul", 27 ]
+    #   r.with(age: 29)  # => [ "Paul", 29 ]
     #
     # other usage :
-    # class Person < SimpleRecord; fields :name, :age; end
-    # Person.new( name: Paul ) => Error, missing :age
+    #   class Person < SimpleRecord; fields :name, :age; end
+    #   Person.new( name: Paul ) => Error, missing :age
     class SimpleRecord < Array
 
       class << self; attr_accessor :fields_list; end

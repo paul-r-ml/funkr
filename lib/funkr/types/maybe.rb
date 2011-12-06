@@ -23,18 +23,18 @@ module Funkr
       ### Categories
 
       include Functor
-
-      # Maybe.nothing.map{|x| something(x)} # => nothing
-      # Maybe.just(x).map{|x| something(x)} # => just something(x)
-      #
+      
       # {Funkr::Categories::Functor#map see functor map}
+      #
+      #   Maybe.nothing.map{|x| something(x)} # => nothing
+      #   Maybe.just(x).map{|x| something(x)} # => just something(x)
       def map(&block)
         # This implementation isn't safe but is a bit faster than the
         # safe one. A safe implementation would be as follow :
-        # self.match do |on|
-        #   on.just {|v| self.class.just(yield(v))}
-        #   on.nothing { self }
-        # end
+        #   self.match do |on|
+        #     on.just {|v| self.class.just(yield(v))}
+        #     on.nothing { self }
+        #   end
         if self.just? then self.class.just(yield(unsafe_content))
         else self end
       end
@@ -42,27 +42,27 @@ module Funkr
       include Applicative
       extend Applicative::ClassMethods
 
-      # Maybe can be made an applicative functor, for example :
-      # f = Maybe.curry_lift_proc{|x,y| x + y}
-      # a = Maybe.just(3)
-      # b = Maybe.just(4)
-      # c = Maybe.nothing
-      # f.apply(a).apply(b) => Just 7
-      # f.apply(a).apply(c) => Nothing
-      #
       # {Funkr::Categories::Applicative#apply see applicative apply}
+      #
+      # Maybe can be made an applicative functor, for example :
+      #   f = Maybe.curry_lift_proc{|x,y| x + y}
+      #   a = Maybe.just(3)
+      #   b = Maybe.just(4)
+      #   c = Maybe.nothing
+      #   f.apply(a).apply(b) => Just 7
+      #   f.apply(a).apply(c) => Nothing
       def apply(to)
         # This implementation isn't safe but is a bit faster than the
         # safe one. A safe implementation would be as follow :
-        # self.match do |f_on|
-        #   f_on.just do |f|
-        #     to.match do |t_on|
-        #       t_on.just {|t| self.class.unit(f.call(t)) }
-        #       t_on.nothing { to }
+        #   self.match do |f_on|
+        #     f_on.just do |f|
+        #       to.match do |t_on|
+        #         t_on.just {|t| self.class.unit(f.call(t)) }
+        #         t_on.nothing { to }
+        #       end
         #     end
+        #     f_on.nothing { self }
         #   end
-        # f_on.nothing { self }
-        # end
         if self.just? and to.just? then
           self.class.unit(self.unsafe_content.call(to.unsafe_content))
         else self.class.nothing end
@@ -103,10 +103,10 @@ module Funkr
       def bind(&block)
         # This implementation isn't safe but is a bit faster than the
         # safe one. A safe implementation would be as follow :
-        # self.match do |on|
-        #   on.just {|v| yield(v)}
-        #   on.nothing {self}
-        # end
+        #   self.match do |on|
+        #     on.just {|v| yield(v)}
+        #     on.nothing {self}
+        #   end
         if self.just? then yield(self.unsafe_content)
         else self end
       end
