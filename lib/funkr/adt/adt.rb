@@ -6,6 +6,8 @@ module Funkr
   # declare constructors with #adt
   class ADT
 
+    MATCHER = Funkr::Matchers::SafeMatcher
+
     def initialize(const, *data)
       @const, @data = const, data
     end
@@ -25,12 +27,13 @@ module Funkr
     #   on.just{|x| puts x}
     #   on.nothing{ }
     # end
-    def match
-      m = self.class.matcher.new(normal_form)
-      yield m
-      m.run_match
+    def match(&block)
+      self.class.matcher.match_with(normal_form, &block)
     end
-    
+
+    def unsafe_const; @const; end
+    def unsafe_data; @data; end
+
     def to_s
       format("{%s%s%s}",
              @const,
@@ -56,7 +59,7 @@ module Funkr
     end
     
     def self.build_matcher(constructs)
-      @matcher = Class.new(Funkr::Matcher) do
+      @matcher = Class.new(MATCHER) do
         build_matchers(constructs)
       end
     end

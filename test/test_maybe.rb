@@ -28,7 +28,8 @@ class TestMaybe < Test::Unit::TestCase
   def test_or_else
     assert_equal(j(10), n.or_else{j(10)})
     assert_equal(j(4), j(4).or_else{j(2)})
-    # assert_nothing_raised(j(2).or_else{raise 'should not be raised'})
+    assert_nothing_raised{ j(5).or_else{raise 'should not be raised'} }
+    assert_raise(RuntimeError){ n.or_else{raise 'should not be raised'} }
   end
 
   def test_full_lift

@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
 module Funkr
   module Types
-    
-    class SimpleRecord < Array
-      ### usage : r = SimpleRecord.new(Hash), then r.field
-      ### r = SimpleRecord.new( name: "Paul", age: 27 )
-      ### r.name => "Paul"  ; r.age => 27
-      ### name, age = r
 
-      ### other usage :
-      ### class Person < SimpleRecord; fields :name, :age; end
-      ### Person.new( name: Paul ) => Error, missing :age
+    # Simple records are a simple way to create records with named AND
+    # positional fields. Records can be updated on a per-field basis
+    # and pattern-matched as arrays. SimpleRecord has the following
+    # advantages above plain Hash :
+    #
+    #  - fields are strict, you can't update an unexisting field by
+    #    mistyping it or by combining it with a different structure
+    #  - you have easy access to fields : named AND positional
+    #
+    # usage : r = SimpleRecord.new(Hash), then r.field
+    # r = SimpleRecord.new( name: "Paul", age: 27 )
+    # r.name # => "Paul"
+    # r.age  # => 27
+    # name, age = r  # => [ "Paul", 27 ]
+    # r.with(age: 29)  # => [ "Paul", 29 ]
+    #
+    # other usage :
+    # class Person < SimpleRecord; fields :name, :age; end
+    # Person.new( name: Paul ) => Error, missing :age
+    class SimpleRecord < Array
 
       class << self; attr_accessor :fields_list; end
       @fields_list = nil
@@ -25,6 +36,8 @@ module Funkr
         end
       end
 
+      # Create a new SimpleRecord. Pass a Hash of keys and associated
+      # values if you want an inline record.
       def initialize(key_vals)
         fields = self.class.fields_list
         if not fields.nil? then # record paramétré
@@ -46,11 +59,13 @@ module Funkr
         end
       end
 
+      # Update a simple record non-destructively
       def with(new_key_vals)
         check_keys(new_key_vals.keys)
         self.class.new(@key_vals.merge(new_key_vals))
       end
 
+      # Update a simple record destructively !!
       def update!(new_key_vals)
         check_keys(new_key_vals.keys)
         @key_vals.merge!(new_key_vals)
