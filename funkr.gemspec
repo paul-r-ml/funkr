@@ -13,13 +13,17 @@ Gem::Specification.new do |s|
   s.description = <<EOF
 Funkr is a functionnal toolbox for the Ruby language.
 
-In particular, it offers a simple mechanism to create Algebraïc Data
+In particular, it offers a simple mechanism to create Algebraic Data
 Types and do pattern matching on them.
+
+-
 
 It also provide modules for common categories (Monoid, Monad,
 Functor, Applicative ...), and extends common types to support
 categories they belongs to (Array, Hash ...). Categories can also be
 used with custom types,  see provided classes.
+
+-
 
 Array and Hash classes are extended with methods providing correct
 behaviour with respect to categories. Enumerable module comes with
