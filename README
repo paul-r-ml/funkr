@@ -11,3 +11,6 @@ used with custom types,  see provided classes.
 
 To get started, we recommand you to read the tests, and get feets wet
 with provided Algebraic Data Types (like Maybe).
+
+Funkr is heavily used by its authors in production at
+http://www.atikteam.com/en to ensure better code reliability.
