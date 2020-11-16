@@ -14,7 +14,7 @@ module Funkr
       def self.build_matchers(constructs)
         @constructs = constructs
         constructs.each do |c|
-          name, *data = c
+          name, *_ = c
           define_method(name) do |&b|
             @undefined.delete(name)
             if @const == name then

@@ -1,3 +1,3 @@
 module Funkr
-  VERSION = "0.0.28"
+  VERSION = "0.0.30"
 end

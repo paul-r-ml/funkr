@@ -66,4 +66,9 @@ class TestExtensions < Test::Unit::TestCase
                  a.make_uniq_by{|x,y| x[:v] == y[:v]})
   end
 
+
+  def test_mconcat_integer
+    assert_equal(6, Integer.mconcat([1,2,3]))
+  end
+
 end

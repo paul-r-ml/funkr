@@ -1,6 +1,6 @@
 require "funkr/categories/monoid"
 
-class Fixnum
+class Integer
 
   include Funkr::Categories
   
@@ -10,6 +10,9 @@ class Fixnum
   def mplus(y)
     self + y
   end
+
+  def self.mzero
+    0
+  end
   
 end
-
